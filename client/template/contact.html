@@ -1,11 +1,47 @@
-<template name="gallery">
-    <h2>
-        연락처
-    </h2>
+<body>
+<div class="container">
+    <header>
+        <h1>갤러리 ({{incompleteCount}})</h1>
+
+        <label class="hide-completed">
+            <input type="checkbox" checked="{{hideCompleted}}" />
+            완료한 작업 숨기기
+        </label>
+
+
+
+        {{#if currentUser}}
+            <form class="new-task">
+                <input type="text" name="text" placeholder="새로운 작업을 입력하세요.."/>
+            </form>
+        {{/if}}
+    </header>
+
     <ul>
-        <li>01010101010</li>
+        {{#each tasks}}  <!--tasks 배열에 접근하여 멤버를 하나씩 불러옴-->
+            {{> task}}  <!--템플릿안에 정의된 속성을 사용함   -->
+        {{/each}}
     </ul>
+</div>
+</body>
 
-        {{> Template.dynamic template=main}}
+<template name="task">  <!--템플릿선언 - name="이름" -->
+    <li class="{{#if checked}}checked{{/if}}
+        {{#if private}}private{{/if}}">
+        <button class="delete">&times;</button>
 
-</template>
+        <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+
+        {{#if isOwner}}
+            <button class="toggle-private">
+                {{#if private}}
+                    개인용
+                {{else}}
+                    공개용
+                {{/if}}
+            </button>
+        {{/if}}
+
+        <span class="text"><strong>{{username}}</strong> - {{text}}</span>
+    </li>
+    </template>

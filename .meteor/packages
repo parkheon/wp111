@@ -22,3 +22,9 @@ iron:router
 twbs:bootstrap
 ian:accounts-ui-bootstrap-3
 accounts-password
+cfs:standard-packages
+cfs:filesystem
+meteorhacks:npm
+
+
+npm-container
